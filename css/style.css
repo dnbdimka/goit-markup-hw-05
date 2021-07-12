@@ -598,12 +598,15 @@ img {
 }
 
 /* MODAL */
-.is-hidden {
-  visibility: hidden;
+.backdrop.is-hidden {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--animation-time) var(--timing-function);
+  /* transform: scale(0); */
 }
 .backdrop.is-hidden .modal {
   transform: scale(0);
-  /* transition: transform 300ms linear; */
+  transition: transform var(--animation-time) var(--timing-function);
 }
 .backdrop {
   width: 100%;
@@ -612,6 +615,7 @@ img {
   top: 0;
   left: 0;
   z-index: 100;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -620,7 +624,7 @@ img {
 }
 .backdrop .modal {
   width: 528px;
-  height: 581px;
+  min-height: 581px;
   padding: 8px;
   position: relative;
 
@@ -630,15 +634,10 @@ img {
   border-radius: 4px;
 
   transform: scale(1);
-  transition: transform 300ms linear;
-  /* animation: modal-scale 1s;
-  animation-fill-mode: forwards; */
-  /* transform: scale(1);
-  transition-property: transform;
-  transition-duration: 250ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); */
+  transition: transform var(--animation-time) var(--timing-function);
 }
-.modal-btn {
+
+.modal-btn-close {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -647,11 +646,18 @@ img {
   position: absolute;
   right: 8px;
   top: 8px;
-  background-color: white;
+  background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
 
 .modal-icon {
   fill: #000000;
+
+  transition: fill var(--animation-time) var(--timing-function),
+    transform var(--animation-time) var(--timing-function);
+}
+.modal-btn-close:hover .modal-icon {
+  fill: var(--brand-color);
+  transform: rotate(0.25turn);
 }
